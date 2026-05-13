@@ -13,12 +13,12 @@ const symbols = "!@#$%^&*()-_=+[]{}|;:'\\\\\",.<>?/`~";
 
 
 function App() {
-  const [firstName, setFirstName] = useState("")
-  const [userName, setUserName] = useState("")
-  const [password, setPassword] = useState("")
-  const [specializzazione, setSpecializzazione] = useState("")
-  const [years, setYears] = useState("")
-  const [description, setDescription] = useState("")
+  const [firstName, setFirstName] = useState("Federico")
+  const [userName, setUserName] = useState("Simone")
+  const [password, setPassword] = useState("@GinKiwi26")
+  const [specializzazione, setSpecializzazione] = useState("Frontend")
+  const [years, setYears] = useState(1)
+  const [description, setDescription] = useState("Ciao, sono Federico e voglio portare a termine questo corso cercando di imparare quante più nozioni possibili")
 
   const isUsernameValid = useMemo(() => {      // usiamo useMemo() perchè serve per restituire un valore (in questo caso booleano) che si salva nella variabile
     // incvece di usare useEffect 
@@ -56,10 +56,6 @@ function App() {
       alert("Inserisci il tuo cognome")
       return
     }
-    if (password.length < 8) {
-      alert("la password deve avere almeno 8 caratteri")
-      return
-    }
     if (years <= 0) {
       alert("Gli anni devono essere positivi")
       return
@@ -74,6 +70,10 @@ function App() {
     }
     if (description.trim() === "") {
       alert("Inserisci una descrizione")
+    }
+
+    if (!isDescriptionValid || !isPasswordValid || !isUsernameValid) {
+      alert("Form non compilato correttamente")
     }
 
     console.log({

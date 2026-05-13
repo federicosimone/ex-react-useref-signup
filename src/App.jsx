@@ -26,17 +26,21 @@ function App() {
       letters.includes(char.toLowerCase()) || numbers.includes(char)
     })
 
-    return charsValid && username.length >= 6
+    return charsValid && userName.trim().length >= 6
   }, [userName]);
 
   const isPasswordValid = useMemo(() => {
-    return (password.length >= 8 &&
+    return (password.trim().length >= 8 &&
       password.split("").some(char => letters.includes(char)) &&
       password.split("").some(char => numbers.includes(char)) &&
       password.split("").some(char => symbols.includes(char))
     )
 
-  }, [password])
+  }, [password]);
+
+  const isDescriptionValid = useMemo(() => {
+    return description.trim().length >= 100 && description.trim().length < 1000;
+  })
 
 
   const submit = (e) => {

@@ -83,7 +83,7 @@ function App() {
     if (!isDescriptionValid || !isPasswordValid || !isUsernameValid) {
       alert("Form non compilato correttamente")
     }
-
+    alert("Hai inviato i dati con successo")
     console.log({
       firstName,
       userName,
@@ -99,7 +99,7 @@ function App() {
 
   return (
     <>
-      <h1>FORM</h1>
+      <h1>Web Development Sign In </h1>
       <form onSubmit={submit} id="studentForm">
         <div className='mb-3'>
           <label className='me-2' htmlFor="firstName">First Name</label>

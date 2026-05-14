@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -13,12 +13,15 @@ const symbols = "!@#$%^&*()-_=+[]{}|;:'\\\\\",.<>?/`~";
 
 
 function App() {
-  const [firstName, setFirstName] = useState("Federico")
+  // campi controllati
   const [userName, setUserName] = useState("Simone")
   const [password, setPassword] = useState("@GinKiwi26")
-  const [specializzazione, setSpecializzazione] = useState("Frontend")
-  const [years, setYears] = useState(1)
   const [description, setDescription] = useState("Ciao, sono Federico e voglio portare a termine questo corso cercando di imparare quante più nozioni possibili")
+  // campi non contollati 
+  const firstNameRef = useRef()
+  const specializzazioneRef = useRef()
+  const yearsRef = useRef()
+
 
   const isUsernameValid = useMemo(() => {      // usiamo useMemo() perchè serve per restituire un valore (in questo caso booleano) che si salva nella variabile
     // incvece di usare useEffect 
@@ -48,6 +51,11 @@ function App() {
 
   const submit = (e) => {
     e.preventDefault();
+
+    const firstName = firstNameRef.current.value;
+    const specializzazione = specializzazioneRef.current.value;
+    const years = yearsRef.current.value;
+    // validazioni al submit 
     if (firstName.trim() === "") {
       alert("Inserisci il tuo nome")
       return  // il return serve per interrompere la funzione se l'input non è ok 
@@ -95,7 +103,7 @@ function App() {
       <form onSubmit={submit} id="studentForm">
         <div className='mb-3'>
           <label className='me-2' htmlFor="firstName">First Name</label>
-          <input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+          <input type="text" id="firstName" ref={firstNameRef} />
 
         </div>
         <div className='mb-3'>
@@ -114,8 +122,8 @@ function App() {
         </div>
         <div className='mb-3'>
           <label className='me-2' htmlFor="specializzazione">Specializzazione</label>
-          <select id="spec" name="specList" form="specform" value={specializzazione} onChange={(e) => setSpecializzazione(e.target.value)}>
-            <option value=""></option>
+          <select id="spec" name="specList" form="specform" ref={specializzazioneRef}>
+            <option value="">Seleziona</option>
             <option value="FullStack">Full stack</option>
             <option value="Frontend">Frontend</option>
             <option value="Backend">Backend</option>
@@ -123,7 +131,7 @@ function App() {
         </div>
         <div className='mb-3'>
           <label className='me-2' htmlFor="years">Anni di esperienza</label>
-          <input type="number" id="years" name="years" min="0" value={years} onChange={(e) => setYears(Number((e.target.value)))}></input>
+          <input type="number" id="years" name="years" min="0" ref={yearsRef}></input>
         </div>
         <div className='mb-3'>
           <label className='me-2' htmlFor="textarea">Breve descrizione</label>
